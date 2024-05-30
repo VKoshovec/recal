@@ -11,7 +11,7 @@ const App = () =>  {
 
   return (<>
     <h1>Hello world!!!</h1>
-    { show && <MyComponenet/>}
+    { show && <MyComponenet message={ "Ukraine" }/>}
     <button 
     type='button'
     onClick={ () => setShow(!show) }>

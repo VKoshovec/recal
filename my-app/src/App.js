@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import MyComponenet from './MyComponenet/MyComponenet';
+import { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+const App = () =>  {
+
+  const [show, setShow ] = useState(false);
+
+  return (<>
+    <h1>Hello world!!!</h1>
+    { show && <MyComponenet/>}
+    <button 
+    type='button'
+    onClick={ () => setShow(!show) }>
+    Show me!!!
+    </button>
+    </>
   );
 }
 

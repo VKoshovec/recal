@@ -2,6 +2,7 @@
 import './App.css';
 import MyComponenet from './MyComponenet/MyComponenet';
 import { useState } from 'react';
+import Pokemons from './Pokemons/Pokemons';
 
 
 
@@ -17,6 +18,7 @@ const App = () =>  {
     onClick={ () => setShow(!show) }>
     Show me!!!
     </button>
+    <Pokemons/>
     </>
   );
 }

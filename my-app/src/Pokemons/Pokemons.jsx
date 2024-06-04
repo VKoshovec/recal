@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
+import { pokemon, pokemonArr } from "../Api/api";
 
 const Pokemons = () => {
 
-
-
-    const [pokemons, addPokemons = (pokemons, obj) => pokemons.push(obj)] = useState([]);
-
-
+    const [pokemons, addPokemons] = useState([]);
 
     useEffect(()=>{
-        fetch("https://pokeapi.co/api/v2/pokemon/ditto").then(res => res.json()).then( body => addPokemons(pokemons, body));
+
+      pokemonArr(40).then( 
+        resp => { console.log(resp);
+                  addPokemons(resp) }
+      )
+       
     },[])
 
-    console.log(pokemons)
+    
 
     return (
         <div>  
-            
+           { pokemons.map((el)=>{
+             return <p>{el.name}</p>
+           }) } 
         </div>
     )
 };

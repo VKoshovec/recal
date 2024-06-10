@@ -3,6 +3,9 @@ import './App.css';
 import MyComponenet from './MyComponenet/MyComponenet';
 import { useState } from 'react';
 import Pokemons from './Pokemons/Pokemons';
+import { BrowserRouter } from 'react-router-dom';
+import Layout from './Pages/Layout/Layout';
+import Routepages from './Pages/Route/Route';
 
 
 
@@ -10,15 +13,10 @@ const App = () =>  {
 
   const [show, setShow ] = useState(false);
 
-  return (<>
-    <h1>Hello world!!!</h1>
-    { show && <MyComponenet message={ "Ukraine" }/>}
-    <button 
-    type='button'
-    onClick={ () => setShow(!show) }>
-    Show me!!!
-    </button>
-    <Pokemons/>
+  return (
+    <>
+      <Layout/>
+      <Routepages/>
     </>
   );
 }

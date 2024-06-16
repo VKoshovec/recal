@@ -1,35 +1,32 @@
 import { useState, useEffect } from "react";
 import { pokemonArr } from "../Api/api";
-import { ColorRing } from 'react-loader-spinner';
-
+import Loader from "../Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { beginSync, finishSync, fetchPokemons, store } from "../redux/redux";
 
 const Pokemons = () => {
 
-    const [pokemons, addPokemons] = useState([]);
-    const [loader, setLoder] = useState(true);
+    const dispatch = useDispatch();
+
+    // const [pokemons, addPokemons] = useState([]);
+    // const [loader, setLoder] = useState(true);
+    const pokemons = useSelector(store => store.pokemons);
 
     useEffect(()=>{
-
-      pokemonArr(1000).then( 
-        resp => {addPokemons(resp); setLoder(false)})
-       
-    },[])  
+    //   dispatch(beginSync());
+    //   pokemonArr(1000).then( 
+    //     resp => {addPokemons(resp); dispatch(finishSync())})
+    dispatch(fetchPokemons())     
+    },[dispatch])  
 
     return (
-        <>  {(loader === true) ? <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="color-ring-loading"
-            wrapperStyle={{}}
-            wrapperClass="color-ring-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-            /> : 
-            <div>
+        <>
+          <Loader/>
+          <div>
             <ul>  
                { pokemons.map(({name}, number) =>{ return <li id={number} key={number}>{name}</li> })} 
             </ul>
-            </div>}
+          </div>
         </>
     )
 };

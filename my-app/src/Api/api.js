@@ -8,7 +8,7 @@ const pokemon = async() => {
     return responce;
 
     } catch (error) {
-    console.log(error);
+    return error;
 }};
 
 const pokemonArr = async(limit) => {
@@ -19,7 +19,7 @@ const pokemonArr = async(limit) => {
     return responce;
 
     } catch (error) {
-    console.log(error);
+    return error;    
 }};
 
 export { pokemon, pokemonArr };

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import { pokemonArr } from "../Api/api";
+import { useEffect } from "react";
 import Loader from "../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { beginSync, finishSync, fetchPokemons, store } from "../redux/redux";
+import { fetchPokemons } from "../redux/redux";
+import { selectPokemons, selectError } from "../redux/selectors";
+import Error from "../Error/Error";
 
 const Pokemons = () => {
 
@@ -10,7 +11,8 @@ const Pokemons = () => {
 
     // const [pokemons, addPokemons] = useState([]);
     // const [loader, setLoder] = useState(true);
-    const pokemons = useSelector(store => store.pokemons);
+    const pokemons = useSelector(selectPokemons);
+    const errors = useSelector(selectError);
 
     useEffect(()=>{
     //   dispatch(beginSync());
@@ -22,11 +24,12 @@ const Pokemons = () => {
     return (
         <>
           <Loader/>
+          <Error/>
           <div>
             <ul>  
                { pokemons.map(({name}, number) =>{ return <li id={number} key={number}>{name}</li> })} 
             </ul>
-          </div>
+          </div>  
         </>
     )
 };

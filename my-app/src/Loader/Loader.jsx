@@ -1,8 +1,9 @@
 import { ColorRing } from 'react-loader-spinner';
 import { useSelector } from "react-redux";
+import { selectLoading } from '../redux/selectors';
 
 const Loader = () => {
-    const Loading = useSelector(state=> state.loading)
+    const Loading = useSelector(selectLoading)
     return(Loading && <ColorRing
         visible={true}
         height="80"

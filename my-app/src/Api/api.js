@@ -12,14 +12,11 @@ const pokemon = async() => {
 }};
 
 const pokemonArr = async(limit) => {
-    
-    try {
 
-    const responce = (await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`)).data.results;
-    return responce;
+       const responce = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`);
+       const data = await responce.data;
+       const results = await data.results;
 
-    } catch (error) {
-    return error;    
-}};
+       return results };
 
 export { pokemon, pokemonArr };

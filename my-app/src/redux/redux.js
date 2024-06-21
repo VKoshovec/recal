@@ -11,18 +11,26 @@ const initialState = {
 export const beginSync = createAction("baginSync");
 export const finishSync = createAction("finishSync");
 
-export const fetchPokemons = createAsyncThunk("pokemons/fetchAll", async () => {
-    // const responce = (await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=30&offset=0`)).data.results;
-    const responce = pokemonArr(30);
+export const fetchPokemons = createAsyncThunk("pokemons/fetchAll", async (_, thunkAPI) => {
+   
+  try {
+
+    const responce = await pokemonArr(30);
+   
     return responce;
-})
+    
+  } catch (error) {
+     
+     return thunkAPI.rejectWithValue(error.message);
+
+  }
+
+});
 
 const reducer = createReducer(initialState,  
     builder => {
         builder
-        .addCase(beginSync, (state)=>{return {loading: true}})
-        .addCase(finishSync, (state)=>{return {loading: false}})
-
+        
         .addCase(fetchPokemons.pending, (state) => { return{
           loading: true,
           pokemons: [],
@@ -32,7 +40,7 @@ const reducer = createReducer(initialState,
           pokemons: action.payload,
           error: null}})
         .addCase(fetchPokemons.rejected, (state,action)=>{ return {
-          loading:false,
+          loading: false,
           pokemons: [],
           error: action.payload}})
     }
